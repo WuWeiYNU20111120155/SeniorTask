@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>goTop面向对象实现</title>
+    <style type="text/css">
+    ul,
+    li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .ct{
+      width: 300px;
+      margin: 0 auto;
+    }
+    .ct>.news>li {
+        height: 120px;
+        text-align: center;
+        border: 1px solid red;
+        line-height: 120px;
+        width:  200px;
+        background: #df6391
+    }
+    .gotop{
+      display: block;
+      width: 200px;
+      height: 100;
+      border: 3px solid #ccc;
+      background: #e34df2;
+      border-radius: 5px;
+      text-align: center;
+      font: 15px;
+      line-height: 100px;
+      cursor: pointer;
+      box-shadow: 2px 2px  5px #ccc;
+      margin-top: 10px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class='ct'>
+        <ul class='news'>
+            <li>新闻1</li>
+            <li>新闻2</li>
+            <li>新闻3</li>
+            <li>新闻4</li>
+            <li>新闻5</li>
+            <li>新闻6</li>
+            <li>新闻7</li>
+            <li>新闻8</li>
+            <li>新闻9</li>
+            <li>新闻10</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+    //   问题6： 创建一个 GoTop 对象，当 new 一个 GotTop 对象则会在页面上创建一个回到顶部的元素，点击页面滚动到顶部。拥有以下属性和方法
+    // ct属性，GoTop 对应的 DOM 元素的容器
+    // target属性， GoTop 对应的 DOM 元素
+    // bindEvent 方法， 用于绑定事件
+    // createNode 方法， 用于在容器内创建节点
+    function GoTop (ct,target) {
+      // body... 
+      this.ct = document.querySelector(ct)
+      this.target = document.createElement(target)
+      this.getNode()
+      this.bindEvent()
+    }
+    GoTop.prototype.getNode=function(){
+          this.target.innerHTML='回到顶部'
+          this.target.classList.add('gotop')
+          this.ct.appendChild(this.target)
+    }
+    GoTop.prototype.bindEvent= function(){
+       var _this = this
+        this.target.addEventListener('click',function(e){
+          console.log(e)
+          _this.target = e.target
+          window.scrollTo(0,0)
+        })
+    }
+    var gotTop1= new GoTop('.ct','div')
+    var gotTop2= new GoTop('.ct','div')
+    </script>
+</body>
+
+</html>
